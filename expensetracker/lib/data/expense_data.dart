@@ -1,9 +1,10 @@
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, slash_for_doc_comments
 
 import 'package:expensetracker/datetime/date_time_helper.dart';
 import 'package:expensetracker/models/expense_item.dart';
+import 'package:flutter/material.dart';
 
-class ExpenseData{
+class ExpenseData extends ChangeNotifier{
 
   // List of all expenses
   List<ExpenseItem> overAllExpenseList = [];
@@ -16,11 +17,13 @@ class ExpenseData{
   // Add new expense
   void addNewExpense(ExpenseItem newExpense){
     overAllExpenseList.add(newExpense);
+    notifyListeners();
   }
 
   // Delete expense
   void deleteExpense(ExpenseItem expense){
     overAllExpenseList.remove(expense);
+    notifyListeners();
   }
 
   // Get WeekDay from a dateTIme object
