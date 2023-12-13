@@ -3,6 +3,7 @@
 import 'package:expensetracker/data/expense_data.dart';
 import 'package:expensetracker/pages/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
       builder: (context,child) => MaterialApp(
         home: HomePage(),
         theme: ThemeData(
+          textTheme: GoogleFonts.aBeeZeeTextTheme(),
           // fontFamily:  GoogleFonts.gochiHand().toString()
         )
       ),
