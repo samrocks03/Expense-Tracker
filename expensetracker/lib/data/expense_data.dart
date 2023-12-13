@@ -57,7 +57,7 @@ class ExpenseData extends ChangeNotifier{
   }
 
   // get the date for start of the week [ sunday ]
-  DateTime getStartOfTheWeek(DateTime dateTime){
+  DateTime getStartOfTheWeek(){
     DateTime? start_of_week;
 
     // get Today's date:
