@@ -48,7 +48,6 @@ class _HomePageState extends State<HomePage> {
       context: context,
       builder: (context)=> AlertDialog(
         title: Text("Add new expense",
-          style:  GoogleFonts.gochiHand()
         ),
         content: Column(
           mainAxisSize: MainAxisSize.min, //to get the minimum size
@@ -65,7 +64,6 @@ class _HomePageState extends State<HomePage> {
 
             // Expense amount
             TextField( controller: new_Expense_AmountController,
-            style:  GoogleFonts.gochiHand(),
             decoration: InputDecoration(
               labelText: "Amount",
               hintStyle:  GoogleFonts.gochiHand())
@@ -77,16 +75,20 @@ class _HomePageState extends State<HomePage> {
 
         actions: [
           // Save Button
-          MaterialButton(onPressed: save,
-          child: Text("Save",
-          style:  GoogleFonts.gochiHand()
-          )),
+            MaterialButton(onPressed: save,
+            child: Text("Save",
+            style:  GoogleFonts.aDLaMDisplay(
+              color: Colors.green
+            )
+            )),
 
-          // Cancel Button
-          MaterialButton(onPressed: cancel,
-          child: Text("Cancel",
-            style:  GoogleFonts.gochiHand()
-          ))
+            // Cancel Button
+            MaterialButton(onPressed: cancel,
+            child: Text("Cancel",
+            style:  GoogleFonts.aDLaMDisplay(
+              color: Colors.red
+            ))
+            )
         ],
       ));
   }
@@ -94,7 +96,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Consumer<ExpenseData>(
       builder: (context, value, child) => Scaffold(
-        backgroundColor: Colors.amberAccent[300],
+        backgroundColor: Colors.grey[300],
     
         floatingActionButton: FloatingActionButton(
           onPressed: addNewExpense,
@@ -103,14 +105,13 @@ class _HomePageState extends State<HomePage> {
     
           body: ListView.builder(
             itemCount : value.getAllExpenses().length,
-            itemBuilder: (context,index){
-              ListTileWidget(
+            itemBuilder: (context,index) => ListTileWidget(
                 dateTime: value.getAllExpenses()[index].dateTime ,
                 name: value.getAllExpenses()[index].name,
-                amount: value.getAllExpenses()[index].amount);
-
-
-          })
+                amount: value.getAllExpenses()[index].amount
+                )
+          
+          )
       ),
     );
   }
