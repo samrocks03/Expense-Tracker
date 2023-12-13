@@ -17,8 +17,7 @@ class ListTileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
     title: Text(name,
-              style:GoogleFonts.gochiHand()
-              ),
+              style:GoogleFonts.gochiHand()),
     subtitle: Text("${dateTime.day} / ${dateTime.month} / ${dateTime.year}"),
     trailing: Text("₹ $amount"));
   }
