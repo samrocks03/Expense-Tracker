@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 
 class ListTileWidget extends StatelessWidget {
@@ -15,7 +16,9 @@ class ListTileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-    title: Text(name),
+    title: Text(name,
+              style:GoogleFonts.gochiHand()
+              ),
     subtitle: Text("${dateTime.day} / ${dateTime.month} / ${dateTime.year}"),
     trailing: Text("₹ $amount"));
   }
