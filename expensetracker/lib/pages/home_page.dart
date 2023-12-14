@@ -104,26 +104,31 @@ class _HomePageState extends State<HomePage> {
           child: Icon(Icons.add)),
     
     
-          body: SafeArea(
-            child: ListView(
-              children: [
-                // weekly - summary
-                ExpenseSummaryWidget(startOfWeek: value.getStartOfTheWeek()),
-            
-                // expense - list
-               ListView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),  //since it should not be scrollable
-                itemCount : value.getAllExpenses().length,
-                itemBuilder: (context,index) => ListTileWidget(
-                    dateTime: value.getAllExpenses()[index].dateTime ,
-                    name: value.getAllExpenses()[index].name,
-                    amount: value.getAllExpenses()[index].amount
-                    )
+          body: Padding(
+            padding: const EdgeInsets.fromLTRB(0, 20, 0, 5),
+            child: SafeArea(
+              child: ListView(
+                children: [
+                  // weekly - summary
+                  ExpenseSummaryWidget(startOfWeek: value.getStartOfTheWeek()),
               
+                  SizedBox(height: 20),
+
+                  // expense - list
+                 ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),  //since it should not be scrollable
+                  itemCount : value.getAllExpenses().length,
+                  itemBuilder: (context,index) => ListTileWidget(
+                      dateTime: value.getAllExpenses()[index].dateTime ,
+                      name: value.getAllExpenses()[index].name,
+                      amount: value.getAllExpenses()[index].amount
+                      )
+                
+                ),
+              
+                ],
               ),
-            
-              ],
             ),
           )
       ),
