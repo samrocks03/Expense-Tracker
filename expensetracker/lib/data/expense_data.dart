@@ -1,5 +1,6 @@
-// ignore_for_file: non_constant_identifier_names, slash_for_doc_comments
+// ignore_for_file: non_constant_identifier_names, slash_for_doc_comments, use_function_type_syntax_for_parameters
 
+import 'package:expensetracker/data/hive_database.dart';
 import 'package:expensetracker/datetime/date_time_helper.dart';
 import 'package:expensetracker/models/expense_item.dart';
 import 'package:flutter/material.dart';
@@ -17,13 +18,27 @@ class ExpenseData extends ChangeNotifier{
   // Add new expense
   void addNewExpense(ExpenseItem newExpense){
     overAllExpenseList.add(newExpense);
+    
     notifyListeners();
+    db.saveData(overAllExpenseList);
   }
 
   // Delete expense
   void deleteExpense(ExpenseItem expense){
     overAllExpenseList.remove(expense);
+
     notifyListeners();
+    db.saveData(overAllExpenseList);
+  }
+
+  final db = HiveDataBase();
+
+  void prepareData(){
+    // if the data already exists:->
+    if(db.readData().isNotEmpty){
+      overAllExpenseList = db.readData();
+    }
+
   }
 
   // Get WeekDay from a dateTIme object
