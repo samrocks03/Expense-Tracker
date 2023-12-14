@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_local_variable, non_constant_identifier_names, body_might_complete_normally_nullable
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_local_variable, non_constant_identifier_names, body_might_complete_normally_nullable, must_call_super
 
 import 'package:expensetracker/components/expense_summary.dart';
 import 'package:expensetracker/data/expense_data.dart';
