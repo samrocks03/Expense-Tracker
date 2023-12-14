@@ -33,7 +33,8 @@ class _HomePageState extends State<HomePage> {
 
   void save(){
     // Creating the expense item
-    String total_amount = "${new_Expense_AmountRupeeController.text}. ${new_Expense_AmountPaisaController.text}";
+    String total_amount = "${new_Expense_AmountRupeeController.text}.${new_Expense_AmountPaisaController.text}";
+    
     ExpenseItem newExpenseItem = ExpenseItem(
           name: new_ExpenseController.text,
           amount: total_amount,
@@ -88,7 +89,7 @@ class _HomePageState extends State<HomePage> {
                   child: TextField(
                     keyboardType: TextInputType.number, 
                     controller: new_Expense_AmountPaisaController,
-                    decoration: input_decoration("Amt in ₹")),
+                    decoration: input_decoration("Amt in प.")),
                 ),
             
               ]
