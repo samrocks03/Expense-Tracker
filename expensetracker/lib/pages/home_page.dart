@@ -18,15 +18,25 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
+  // input-decoration for Dialog box
+  InputDecoration input_decoration(String name){
+    return InputDecoration(
+              labelText: name,
+              hintStyle:  GoogleFonts.gochiHand());
+
+  } 
+  
   // Textcontrollers : to access the text, user has entered into the TextField
   final new_ExpenseController = TextEditingController();
-  final new_Expense_AmountController = TextEditingController();
+  final new_Expense_AmountRupeeController = TextEditingController();
+  final new_Expense_AmountPaisaController = TextEditingController();
 
   void save(){
     // Creating the expense item
+    String total_amount = "${new_Expense_AmountRupeeController.text}. ${new_Expense_AmountPaisaController.text}";
     ExpenseItem newExpenseItem = ExpenseItem(
           name: new_ExpenseController.text,
-          amount: new_Expense_AmountController.text,
+          amount: total_amount,
           dateTime: DateTime.now());
 
     Provider.of<ExpenseData>(context,listen: false).addNewExpense(newExpenseItem);
@@ -42,7 +52,8 @@ class _HomePageState extends State<HomePage> {
 
   void clear(){
     new_ExpenseController.clear();
-    new_Expense_AmountController.clear();
+    new_Expense_AmountRupeeController.clear();
+    new_Expense_AmountPaisaController.clear();
   }
   void addNewExpense(){
     showDialog(
@@ -55,40 +66,51 @@ class _HomePageState extends State<HomePage> {
           children: [
 
             // Expense name
-            TextField( controller: new_ExpenseController,
-            style:  GoogleFonts.gochiHand(),
-            decoration: InputDecoration(
-              labelText: "Name",
-              hintStyle:  GoogleFonts.gochiHand())
-            ),
+            TextField( 
+              keyboardType: TextInputType.multiline,
+              controller: new_ExpenseController,
+              decoration: input_decoration("Name")),
 
 
             // Expense amount
-            TextField( controller: new_Expense_AmountController,
-            decoration: InputDecoration(
-              labelText: "Amount",
-              hintStyle:  GoogleFonts.gochiHand())
-            ),
-
-
+            Row(
+              children: [
+                // Rupee
+                Expanded(
+                  child: TextField(
+                    keyboardType: TextInputType.number, 
+                    controller: new_Expense_AmountRupeeController,
+                    decoration: input_decoration("Amt in ₹")),
+                ),
+            
+                // Paisaa
+                Expanded(
+                  child: TextField(
+                    keyboardType: TextInputType.number, 
+                    controller: new_Expense_AmountPaisaController,
+                    decoration: input_decoration("Amt in ₹")),
+                ),
+            
+              ]
+            )
           ],
         ),
 
         actions: [
           // Save Button
             MaterialButton(onPressed: save,
-            child: Text("Save",
-            style:  GoogleFonts.aDLaMDisplay(
-              color: Colors.green
-            )
-            )),
+              child: Text("Save",
+                      style:  GoogleFonts.aDLaMDisplay(
+                        color: Colors.green
+                    ))
+              ),
 
             // Cancel Button
             MaterialButton(onPressed: cancel,
             child: Text("Cancel",
-            style:  GoogleFonts.aDLaMDisplay(
-              color: Colors.red
-            ))
+                    style:  GoogleFonts.aDLaMDisplay(
+                      color: Colors.red
+                  ))
             )
         ],
       ));
