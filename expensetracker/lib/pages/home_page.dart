@@ -31,20 +31,41 @@ class _HomePageState extends State<HomePage> {
   final new_Expense_AmountRupeeController = TextEditingController();
   final new_Expense_AmountPaisaController = TextEditingController();
 
-  void save(){
-    // Creating the expense item
-    String total_amount = "${new_Expense_AmountRupeeController.text}.${new_Expense_AmountPaisaController.text}";
+  @override
+  void initState() {
+    // TODO: implement initState
     
-    ExpenseItem newExpenseItem = ExpenseItem(
-          name: new_ExpenseController.text,
-          amount: total_amount,
-          dateTime: DateTime.now());
-
-    Provider.of<ExpenseData>(context,listen: false).addNewExpense(newExpenseItem);
-
-    Navigator.pop(context);
-    clear();  // to clear the cache present after entering a value in it.
+    
+    // prepare the data on start-up
+    Provider.of<ExpenseData>(context,listen: false).prepareData();
   }
+
+  void save(){
+
+    if(new_ExpenseController.text.isNotEmpty && 
+        new_Expense_AmountPaisaController.text.isNotEmpty && 
+        new_Expense_AmountRupeeController.text.isNotEmpty)
+      {    
+          // Creating the expense item
+          String total_amount = "${new_Expense_AmountRupeeController.text}.${new_Expense_AmountPaisaController.text}";
+          
+          ExpenseItem newExpenseItem = ExpenseItem(
+                name: new_ExpenseController.text,
+                amount: total_amount,
+                dateTime: DateTime.now());
+
+          Provider.of<ExpenseData>(context,listen: false).addNewExpense(newExpenseItem);
+
+          Navigator.pop(context);
+          clear();  // to clear the cache present after entering a value in it.
+      }
+  }
+
+  void deleteExpense(ExpenseItem expense){
+    // Provider.of<ExpenseData>(,listen:false).deleteExpense(expense);
+    Provider.of<ExpenseData>(context,listen: false).deleteExpense(expense);
+  }
+
 
   void cancel(){
     Navigator.pop(context);
@@ -145,7 +166,8 @@ class _HomePageState extends State<HomePage> {
                   itemBuilder: (context,index) => ListTileWidget(
                       dateTime: value.getAllExpenses()[index].dateTime ,
                       name: value.getAllExpenses()[index].name,
-                      amount: value.getAllExpenses()[index].amount
+                      amount: value.getAllExpenses()[index].amount,
+                      delTapped: (p0 )=> deleteExpense(value.getAllExpenses()[index]),
                       )
                 
                 ),
