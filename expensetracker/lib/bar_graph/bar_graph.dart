@@ -56,13 +56,15 @@ class MyBarGraph extends StatelessWidget {
           leftTitles: AxisTitles(
             sideTitles: SideTitles(showTitles: false)),
           
-          
+
           bottomTitles: AxisTitles(
             sideTitles: SideTitles(
               showTitles: true,
               getTitlesWidget: getBottomTitles
             )
           ),
+
+          
         ),
         barGroups: myBarData.barData
         .map((data) => 
